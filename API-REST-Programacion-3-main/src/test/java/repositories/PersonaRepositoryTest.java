@@ -1,24 +1,32 @@
-/* package repositories;
+package repositories;
 
 import com.example.persona_dos.entities.Persona;
 import com.example.persona_dos.repositories.PersonaRepository;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
-@DataJpaTest
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 class PersonaRepositoryTest {
 
-    @Autowired
+    @Mock
     private EntityManager entityManager;
 
-    @Autowired
+    @Mock
     private PersonaRepository personaRepository;
+
+    @BeforeEach
+    void setUp(){
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     void testSearchString() {
@@ -32,11 +40,10 @@ class PersonaRepositoryTest {
         entityManager.persist(persona);
         entityManager.flush();
         
-        Assertions.assertEquals(ListaEnviada, personaRepository.searchNativo("Matias"));
-        Assertions.assertEquals(ListaEnviada, personaRepository.searchNativo("Pietro"));
+        assertEquals(ListaEnviada, personaRepository.searchNativo("Matias"));
+        assertEquals(ListaEnviada, personaRepository.searchNativo("Pietro"));
 
 
     }
 
 }
- */

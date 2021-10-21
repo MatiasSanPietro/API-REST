@@ -1,21 +1,29 @@
-/* package controllers;
+package controllers;
 
-import com.example.persona_dos.controllers.PersonaController;
 import com.example.persona_dos.entities.Persona;
+import com.example.persona_dos.repositories.PersonaRepository;
 import com.example.persona_dos.services.PersonaServiceImpl;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@WebMvcTest(PersonaController.class)
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 class PersonaControllerTest {
 
-    @MockBean
+    @Mock
+    private PersonaRepository personaRepository;
+
+    @Mock
     private PersonaServiceImpl personaService;
+
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     void testSearchString() throws Exception {
@@ -23,10 +31,12 @@ class PersonaControllerTest {
         persona.setNombre("Matias");
         persona.setApellido("Pietro");
 
-        List<Persona> ListaEnviada = new ArrayList();
-        ListaEnviada.add(persona);
+        List<Persona> listaEnviada = new ArrayList<>();
+        listaEnviada.add(persona);
 
+        when(personaRepository.searchNativo("Matias")).thenReturn(listaEnviada);
+
+        assertEquals(listaEnviada, personaService.search("Matias"));
 
     }
 }
- */
