@@ -1,12 +1,11 @@
-package repositories;
+package com.example.persona_dos.repositories;
 
 import com.example.persona_dos.entities.Persona;
-import com.example.persona_dos.repositories.PersonaRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -14,19 +13,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTest
 class PersonaRepositoryTest {
 
-    @Mock
+    @Autowired
     private EntityManager entityManager;
 
-    @Mock
+    @Autowired
     private PersonaRepository personaRepository;
-
-    @BeforeEach
-    void setUp(){
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     void testSearchString() {

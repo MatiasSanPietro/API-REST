@@ -1,4 +1,4 @@
-package controllers;
+package com.example.persona_dos.controllers;
 
 import com.example.persona_dos.entities.Persona;
 import com.example.persona_dos.repositories.PersonaRepository;
